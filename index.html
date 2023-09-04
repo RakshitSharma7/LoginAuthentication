@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Authentication</title>
+</head>
+<body>
+    <h1>User Authentication</h1>
+
+    <!-- Registration Form -->
+    <h2>Register</h2>
+    <form id="register-form">
+        <input type="email" placeholder="Email" id="register-email" required>
+        <input type="password" placeholder="Password" id="register-password" required>
+        <button type="submit">Register</button>
+    </form>
+
+    <!-- Login Form -->
+    <h2>Login</h2>
+    <form id="login-form">
+        <input type="email" placeholder="Email" id="login-email" required>
+        <input type="password" placeholder="Password" id="login-password" required>
+        <button type="submit">Login</button>
+    </form>
+
+    <!-- Password Reset Form -->
+    <h2>Password Reset</h2>
+    <form id="reset-form">
+        <input type="email" placeholder="Email" id="reset-email" required>
+        <button type="submit">Reset Password</button>
+    </form>
+
+    <script>
+        // JavaScript code for user registration, login, and password reset goes here
+
+        // Example: Handle registration form submission
+        document.getElementById("register-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const email = document.getElementById("register-email").value;
+            const password = document.getElementById("register-password").value;
+            
+            // Send a POST request to your backend to register the user
+            fetch("/auth/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email, password }),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                alert(data.message);
+            })
+            .catch((error) => {
+                console.error(error);
+                alert("Registration failed.");
+            });
+        });
+
+        // Similar event listeners can be added for login and password reset forms
+    </script>
+</body>
+</html>
